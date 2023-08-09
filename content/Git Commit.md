@@ -1,0 +1,5 @@
+---
+title: "Git Commit"
+---
+## Commit Messages
+A proper git commit should have a descriptive and concise commit message that explains the changes being made in the commit. It is also a good practice to make atomic commits, which means that each commit should contain related changes that all work together. This makes it easier to understand the changes made in each commit and to revert specific commits if necessary. Here are some tips for writing good commit messages: Use the present tense and imperative mood in the commit message. For example, "Fix bug" instead of "Fixed bug" or "Fixes bug." Keep the commit message short, but descriptive. Aim for around 50 characters for the subject line and around 72 characters for the body. Use the body of the commit message to explain the reasoning behind the changes and any additional context that may be helpful.

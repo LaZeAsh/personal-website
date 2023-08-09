@@ -1,0 +1,4 @@
+---
+title: "Net Neutrality"
+---
+Net Neutrality, Net Neutrality is the principle that an ISP (Internet Service Provider) has to provide access to all of the contents of the internet at the same speeds without blocking or giving preference to certain content. Net Neutrality is an issue in America today because they think it is important to have a platform that promotes innovation, free speech, and competition (no monopolies). If this isn’t followed it could create an internet where some users / companies have an advantage over others and where ISPs have too much power to profit over online content.

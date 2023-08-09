@@ -1,0 +1,4 @@
+---
+title: "Excuses"
+aliases: Excuse
+---
