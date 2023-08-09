@@ -6,10 +6,10 @@
   "type": "module",
   "author": "jackyzha0 <j.zhao2k19@gmail.com>",
   "license": "MIT",
-  "homepage": "https://quartz.jzhao.xyz",
+  "homepage": "https://ayushgarg.ca/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jackyzha0/quartz.git"
+    "url": "https://github.com/LaZeAsh/personal-website.git"
   },
   "scripts": {
     "check": "tsc --noEmit && npx prettier . --check",

@@ -9,7 +9,7 @@ const config: QuartzConfig = {
     analytics: {
       provider: "plausible",
     },
-    baseUrl: "quartz.jzhao.xyz",
+    baseUrl: "ayushgarg.ca",
     ignorePatterns: ["private", "templates"],
     theme: {
       typography: {
@@ -26,17 +26,18 @@ const config: QuartzConfig = {
           dark: "#2b2b2b",
           secondary: "#284b63",
           tertiary: "#84a59d",
+          // highlight: "#F42C04",
           highlight: "rgba(143, 159, 169, 0.15)",
         },
         darkMode: {
           light: "#161618",
-          lightgray: "#393639",
+          lightgray: "#393639", // Changes color 
           gray: "#646464",
-          darkgray: "#d4d4d4",
+          darkgray: "#d4d4d4", // Changes color of the text
           dark: "#ebebec",
-          secondary: "#7b97aa",
+          secondary: "#7b97aa", // Changes color of title
           tertiary: "#84a59d",
-          highlight: "rgba(143, 159, 169, 0.15)",
+          highlight: "rgba(143, 159, 169, 0.15)", // Changes color of highlight
         },
       },
     },

@@ -1,4 +1,4 @@
-import { QuartzComponentConstructor } from "./types"
+import { QuartzComponentConstructor, QuartzComponentProps } from "./types"
 // @ts-ignore
 import script from "./scripts/graph.inline"
 import style from "./styles/graph.scss"
@@ -46,12 +46,16 @@ const defaultOptions: GraphOptions = {
 }
 
 export default ((opts?: GraphOptions) => {
-  function Graph() {
+  function Graph({fileData}: QuartzComponentProps) {
     const localGraph = { ...opts?.localGraph, ...defaultOptions.localGraph }
     const globalGraph = { ...opts?.globalGraph, ...defaultOptions.globalGraph }
+    if (fileData.slug === 'index') {
+      localGraph.depth = -1
+    }
     return (
       <div class="graph">
         <h3>Graph View</h3>
+        <p><i>Try to use your cursor to browse the graph!</i></p>
         <div class="graph-outer">
           <div id="graph-container" data-cfg={JSON.stringify(localGraph)}></div>
           <svg
