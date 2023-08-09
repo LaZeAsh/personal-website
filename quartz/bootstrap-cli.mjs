@@ -125,7 +125,7 @@ async function popContentFolder(contentFolder) {
 }
 
 function gitPull(origin, branch) {
-  const flags = ["-s", "recursive", "-X", "ours", "--no-edit"]
+  const flags = ["--no-rebase", "-s", "recursive", "-X", "ours", "--no-edit"]
   spawnSync("git", ["pull", ...flags, origin, branch], { stdio: "inherit" })
 }
 
