@@ -1,6 +1,5 @@
 ---
-title: ""
-aliases:
+title: "Haikyuu"
 tags:
-- 
+- Haikyuu
 ---

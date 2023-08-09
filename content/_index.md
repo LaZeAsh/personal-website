@@ -1,8 +1,7 @@
 ---
-title: Ayush 
+title: "Yo, I am Ayush 1️⃣7️⃣" 
 enableToc: false
 ---
-<h1>Heyo, I'm [[Ayush]] 👋</h1>
 
 I'm a high school senior at Foothill High School in California who's interested in pursuing the field of STEM. 
 
@@ -22,7 +21,7 @@ Quote that inspires me:
 
 Currently Reading:
 
-<h2>My Mind 🧠</h2>
+## My Mind 🧠
 
 I started taking notes on [[Obsidian]] on October 15, 2022 
 
@@ -36,10 +35,10 @@ Browse My Mind:
 
 ⚠️ By no means are my notes perfect, I learn differently and view things differently than other people and therefore I recommend you take what you see with a [[Grain of salt |grain of salt]] 
 
-<h2>In Times Gone By</h2>
+## In Times Gone By
 
 ![[images/TTSF.jpeg]]
-<center><i><p>Speaker at [[Teen Tech San Francisco|TTSF]] STEM Inclusivity Forum</p></i></center>
+<center><i><p>Speaker at Teen Tech San Francisco's STEM Inclusivity Forum</p></i></center>
 
 
 - I interned at Our Wave Hub in a partner program with [AppleEDU](https://twitter.com/AppleEDU) where I developed iOS Apps with [[Swift]]

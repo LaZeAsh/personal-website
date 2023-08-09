@@ -1,4 +1,4 @@
-import { QuartzComponentConstructor } from "./types"
+import { QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import style from "./styles/footer.scss"
 import { version } from "../../package.json"
 
@@ -7,14 +7,14 @@ interface Options {
 }
 
 export default ((opts?: Options) => {
-  function Footer() {
+  function Footer({fileData}: QuartzComponentProps) {
     const year = new Date().getFullYear()
     const links = opts?.links ?? []
     return (
       <footer>
         <hr />
         <p>
-          Created with <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a>, © {year}
+          Created by Ayush Garg using <a href="https://quartz.jzhao.xyz/">Quartz</a>, © {year}
         </p>
         <ul>
           {Object.entries(links).map(([text, link]) => (

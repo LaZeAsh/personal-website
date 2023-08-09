@@ -116,7 +116,8 @@ export async function parseMarkdown(ctx: BuildCtx, fps: FilePath[]): Promise<Pro
   const log = new QuartzLogger(argv.verbose)
 
   const CHUNK_SIZE = 128
-  let concurrency = fps.length < CHUNK_SIZE ? 1 : os.availableParallelism()
+  // let concurrency = fps.length < CHUNK_SIZE ? 1 : os.availableParallelism()
+  let concurrency = 1
 
   let res: ProcessedContent[] = []
   log.start(`Parsing input files using ${concurrency} threads`)

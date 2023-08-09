@@ -1,8 +1,5 @@
 ---
-title: ""
-aliases:
-tags:
-- 
+title: "Video Editing"
 ---
 
 Video editing software I am using: [[Final Cut Pro]]

@@ -1,7 +1,5 @@
 ---
 title: "Cars"
-aliases:
-tags:
-- 
 ---
+
 
