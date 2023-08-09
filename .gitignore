@@ -5,4 +5,4 @@ public
 tsconfig.tsbuildinfo
 .obsidian
 .quartz-cache
-private
+private/
