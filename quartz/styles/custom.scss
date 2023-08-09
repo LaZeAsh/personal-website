@@ -1,0 +1,17 @@
+.custom-layout {
+    display: flex;
+    justify-content: space-between;
+
+    .item {
+        flex: 1;
+        margin: 0 10px;
+
+        p {
+            text-align: center;
+        }
+        
+        blockquote {
+            color: #d4d4d4;
+        }
+    }
+}
