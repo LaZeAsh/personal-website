@@ -10,7 +10,7 @@ export default (() => {
     const { css, js } = externalResources
     const baseDir = pathToRoot(slug)
     const iconPath = baseDir + "/static/icon.png"
-    const ogImagePath = `https://${cfg.baseUrl}/static/og-image.png`
+    const ogImagePath = `https://${cfg.baseUrl}/static/icon.png`
 
     return (
       <head>
