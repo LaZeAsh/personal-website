@@ -5,7 +5,7 @@ aliases: RHSS
 
 School in Canada I attended for Grade 10 2nd semester and Grade 11 1st semester. 
 
-Went under the name Ayush Ayush at this school because I only have 1 legal name and the Canadian education system really gives a shit about that I guess
+Went under the name Ayush Ayush at this school because I only have 1 legal name
 
 ## Activities
 
