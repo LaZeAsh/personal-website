@@ -8,6 +8,13 @@ I would love to enjoy my final year of high school although I want to achieve my
 
 Courses:
 
+- [[US History]]
+- [[Expos reading & writing]]
+- [[Physics]]
+- [[Economics]]
+- [[Advanced Computer Science]]
+- [[AP Calculus BC]]
+
 Day School:
 
 [[AP Calculus BC]] (prerequisite for UWaterloo)

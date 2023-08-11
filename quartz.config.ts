@@ -55,6 +55,7 @@ const config: QuartzConfig = {
           tertiary: "#4A8CD4",    // Brighter sky blue
           highlight: "#1E2F4A"    // Muted deep sea blue for highlighted background
           
+          
         },
       },
     },

@@ -5,6 +5,9 @@ tags:
 ---
 Taking this course my [[grade 12]] year and I want to get a headstart on it hence I will be studying and watching lessons
 
+This course is being taught by [[Jennifer Kelly|Mrs.Kelly]] 
+
+
 I am currently using the [Khan Academy](https://www.khanacademy.org/math/ap-calculus-bc) curriculum
 All the work for this course has been done on [good notes](https://share.goodnotes.com/s/3MyJ4ctjUc4RpfrtEAiwij)
 

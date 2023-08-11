@@ -1,5 +1,5 @@
 ---
-title: "Yo, I am Ayush 1️⃣7️⃣" 
+title: "Hi, I am Ayush 1️⃣7️⃣" 
 enableToc: false
 ---
 
