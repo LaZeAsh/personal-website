@@ -4,6 +4,9 @@ tags:
 - AP Calculus BC
 ---
 
+Continuous if:
+- if f(x) exists
+- if lim x$^-$ and lim x$^+$ exists
 ## Point / Removable 
 
 ![[images/Pasted image 20230804125752.png]]

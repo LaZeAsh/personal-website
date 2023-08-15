@@ -14,3 +14,6 @@ People said that she's pretty strict, although I think this may be because of th
 
 Ms.Kelly seems to be very passionate about what she does, and so far she seems like a reasonable human being. I am not sure if I made the best first impression but she is someone who I think can help me set a good foundation for Calculus and I am grateful to have her as a teacher. I am starting to notice a pattern all the rigorous courses are the ones where the teachers are "hated" the most.
 
+## Favorite things
+
+According to the beginning of the year google form seems like Mrs.Kelly likes Starbucks Peppermint Mocha and Chocolate Chip Cookies, don't know why I am writing this down but thought this would be good to know lol.
