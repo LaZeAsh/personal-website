@@ -13,7 +13,18 @@ Learning logs for this course will be in [[AP Chemistry Logs]]
 
 [[Periodic Table of Elements]] - Mr.Hoffman Grade 11 Chemistry (Canada)
 
-## Unit 1: Atomic structure and properties
+Use Ms.Morris's Chapter 4 - what to know to correlate what she teaches to AP Classroom
+
+AP Chemistry curriculum was revamped in 2014
+
+## Class Notes
+
+-  [[Types of Solution Reactions]]
+- [[Solubility Rules]]
+- 
+
+## Khan Academy
+### Unit 1: Atomic structure and properties
 
 - [[Average atomic mass]]
 - [[Mole and Avogadro's number]]
@@ -23,3 +34,4 @@ Learning logs for this course will be in [[AP Chemistry Logs]]
 - [[Calculating mass percent]]
 - [[Determining an empirical formula from percent composition]]
 - [[Determining an empirical formula from combustion data]]
+

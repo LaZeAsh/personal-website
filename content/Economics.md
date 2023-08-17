@@ -28,6 +28,11 @@ Policies Quiz:
 	- No food in class
 
 Statement - Explain the concept, pictures do not count as statements
+
+## Outline
+- Number 1 - 20
+- Flip the page and continue on the back
+- 
 ## Chapter 1
 
 - [[Scarcity - The Basic Economic Problem]]
