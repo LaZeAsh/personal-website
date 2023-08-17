@@ -1,8 +1,5 @@
 ---
 title: "Graphing Calculator"
-aliases:
-tags:
-- 
 ---
 
 Store the value in your calculator
