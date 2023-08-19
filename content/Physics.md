@@ -13,6 +13,9 @@ A lot of stuff with motion and velocity
 - 
 - Speed of light 
 
+- [[Graphical Kinematics Notes]]
+- 
+
 [[Physics - Unit 1 test]]
 
 ##  Unit 2: Kinematics and Dynamics

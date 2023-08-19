@@ -19,6 +19,10 @@ Sometimes [[Christopher Gibbons|Mr.Gibbons]] drops hints before the unit test an
 - Graph on the test where we will have to find slope
 - Precision and Accuracy on the test
 - Difference between scalar & vector (1st couple unit tests)
+- What's a hypothesis
+- Most of physics stuff is from the summary page on the kinematics note
+- Look at kinematics notes study that for the unit test
+- "Read the graph"
 
 
 Unit 3 - 4 part calculation (if done without then you will get 1 point)

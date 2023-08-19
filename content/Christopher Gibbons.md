@@ -6,6 +6,10 @@ tags:
 
 Mr.Gibbons is my [[Grade 12]] [[Physics]] teacher, like all my teachers I respect him very much. Mr.Gibbons graduated from University of California Berkeley, go bears!
 
+## Likes
+
+Boxes.
+
 ## What people have told me
 
 People say Mr.Gibbons is a hard teacher his class isn't easy and how he's a little sarcastic sometimes.

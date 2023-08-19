@@ -16,4 +16,5 @@ In a double displacement reaction a product will contain at least one of the ion
 
 Other words: Just look for these and if the compound includes these then soluble if not then it's insoluble
 
+If an ion is ionic then it'll split into ions when put in water if covalent the molecules will stay together
 
