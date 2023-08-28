@@ -33,11 +33,10 @@ I'm a high school senior at Foothill High School in California who's interested 
     <div class="item">
         <p>Currently Reading:</p>
         <blockquote>
-            None at the moment!
+			[[Sun Tzu The Art of War|Sun Tzu: The Art of War]]
         </blockquote>
     </div>
 </div>
-
 
 ## My Mind 🧠
 

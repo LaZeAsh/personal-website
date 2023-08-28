@@ -22,6 +22,7 @@ AP Chemistry curriculum was revamped in 2014
 
 -  [[Types of Solution Reactions]]
 - [[Solubility Rules]]
+- [[Hydrate Lab]]
 - 
 
 ## Khan Academy

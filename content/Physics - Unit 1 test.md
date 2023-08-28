@@ -23,6 +23,8 @@ Sometimes [[Christopher Gibbons|Mr.Gibbons]] drops hints before the unit test an
 - Most of physics stuff is from the summary page on the kinematics note
 - Look at kinematics notes study that for the unit test
 - "Read the graph"
+- Hardest part of the test: 
+	- Maximum total displacement in the positive & negative direction
 
 
 Unit 3 - 4 part calculation (if done without then you will get 1 point)
