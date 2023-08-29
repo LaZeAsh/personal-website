@@ -1,5 +1,5 @@
-import { QuartzConfig } from "./cfg"
-import { ServerSlug } from "./path"
+import { QuartzConfig } from "../cfg"
+import { FullSlug } from "./path"
 
 export interface Argv {
   directory: string
@@ -7,11 +7,13 @@ export interface Argv {
   output: string
   serve: boolean
   port: number
+  wsPort: number
+  remoteDevHost?: string
   concurrency?: number
 }
 
 export interface BuildCtx {
   argv: Argv
   cfg: QuartzConfig
-  allSlugs: ServerSlug[]
+  allSlugs: FullSlug[]
 }

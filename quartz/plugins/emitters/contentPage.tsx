@@ -4,7 +4,7 @@ import HeaderConstructor from "../../components/Header"
 import BodyConstructor from "../../components/Body"
 import { pageResources, renderPage } from "../../components/renderPage"
 import { FullPageLayout } from "../../cfg"
-import { FilePath, canonicalizeServer } from "../../path"
+import { FilePath } from "../../util/path"
 import { defaultContentPageLayout, sharedPageComponents } from "../../../quartz.layout"
 import { Content } from "../../components"
 
@@ -30,7 +30,7 @@ export const ContentPage: QuartzEmitterPlugin<Partial<FullPageLayout>> = (userOp
       const fps: FilePath[] = []
       const allFiles = content.map((c) => c[1].data)
       for (const [tree, file] of content) {
-        const slug = canonicalizeServer(file.data.slug!)
+        const slug = file.data.slug!
         const externalResources = pageResources(slug, resources)
         const componentData: QuartzComponentProps = {
           fileData: file.data,
@@ -42,11 +42,9 @@ export const ContentPage: QuartzEmitterPlugin<Partial<FullPageLayout>> = (userOp
         }
 
         const content = renderPage(slug, componentData, opts, externalResources)
-
-        const fp = (file.data.slug + ".html") as FilePath
-        await emit({
+        const fp = await emit({
           content,
-          slug: file.data.slug!,
+          slug,
           ext: ".html",
         })
 

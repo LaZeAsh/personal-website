@@ -7,6 +7,7 @@
   padding: 0 1rem;
   overflow-y: hidden;
   transition: max-height 0.3s ease;
+  box-sizing: border-box;
 
   & > *:nth-child(2) {
     margin-top: 0;
@@ -81,7 +82,6 @@
 
 .callout-title {
   display: flex;
-  align-items: center;
   gap: 5px;
   padding: 1rem 0;
   color: var(--color);
@@ -92,11 +92,18 @@
     opacity: 0.8;
     cursor: pointer;
   }
+
+  & > .callout-title-inner > p {
+    color: var(--color);
+    margin: 0;
+  }
 }
 
 .callout-icon {
   width: 18px;
   height: 18px;
+  flex: 0 0 18px;
+  padding-top: 4px;
 }
 
 .callout-title-inner {

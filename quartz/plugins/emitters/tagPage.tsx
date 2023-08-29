@@ -5,13 +5,7 @@ import BodyConstructor from "../../components/Body"
 import { pageResources, renderPage } from "../../components/renderPage"
 import { ProcessedContent, defaultProcessedContent } from "../vfile"
 import { FullPageLayout } from "../../cfg"
-import {
-  CanonicalSlug,
-  FilePath,
-  ServerSlug,
-  getAllSegmentPrefixes,
-  joinSegments,
-} from "../../path"
+import { FilePath, FullSlug, getAllSegmentPrefixes, joinSegments } from "../../util/path"
 import { defaultListPageLayout, sharedPageComponents } from "../../../quartz.layout"
 import { TagContent } from "../../components"
 
@@ -41,7 +35,7 @@ export const TagPage: QuartzEmitterPlugin<FullPageLayout> = (userOpts) => {
         allFiles.flatMap((data) => data.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes),
       )
       // add base tag
-      tags.add("")
+      tags.add("index")
 
       const tagDescriptions: Record<string, ProcessedContent> = Object.fromEntries(
         [...tags].map((tag) => {
@@ -49,7 +43,7 @@ export const TagPage: QuartzEmitterPlugin<FullPageLayout> = (userOpts) => {
           return [
             tag,
             defaultProcessedContent({
-              slug: joinSegments("tags", tag, "index") as ServerSlug,
+              slug: joinSegments("tags", tag) as FullSlug,
               frontmatter: { title, tags: [] },
             }),
           ]
@@ -59,7 +53,7 @@ export const TagPage: QuartzEmitterPlugin<FullPageLayout> = (userOpts) => {
       for (const [tree, file] of content) {
         const slug = file.data.slug!
         if (slug.startsWith("tags/")) {
-          const tag = joinSegments(slug.slice("tags/".length), "index")
+          const tag = slug.slice("tags/".length)
           if (tags.has(tag)) {
             tagDescriptions[tag] = [tree, file]
           }
@@ -67,7 +61,7 @@ export const TagPage: QuartzEmitterPlugin<FullPageLayout> = (userOpts) => {
       }
 
       for (const tag of tags) {
-        const slug = joinSegments("tags", tag) as CanonicalSlug
+        const slug = joinSegments("tags", tag) as FullSlug
         const externalResources = pageResources(slug, resources)
         const [tree, file] = tagDescriptions[tag]
         const componentData: QuartzComponentProps = {
@@ -80,9 +74,7 @@ export const TagPage: QuartzEmitterPlugin<FullPageLayout> = (userOpts) => {
         }
 
         const content = renderPage(slug, componentData, opts, externalResources)
-
-        const fp = (file.data.slug + ".html") as FilePath
-        await emit({
+        const fp = await emit({
           content,
           slug: file.data.slug!,
           ext: ".html",

@@ -11,18 +11,25 @@ html {
   width: 100vw;
 }
 
-body {
+body,
+section {
   margin: 0;
   max-width: 100%;
   box-sizing: border-box;
   background-color: var(--light);
   font-family: var(--bodyFont);
+  color: var(--darkgray);
 }
 
 .text-highlight {
   background-color: #fff23688;
   padding: 0 0.1rem;
   border-radius: 5px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--tertiary) 75%, transparent);
+  color: var(--darkgray);
 }
 
 p,
@@ -43,7 +50,6 @@ ul,
 }
 
 .math {
-  font-size: 1.1rem;
   &.math-display {
     text-align: center;
   }
@@ -319,7 +325,6 @@ pre {
   border-radius: 5px;
   overflow-x: auto;
   border: 1px solid var(--lightgray);
-  position: relative;
 
   &:has(> code.mermaid) {
     border: none;
@@ -442,7 +447,7 @@ video {
 ul.overflow,
 ol.overflow {
   height: 300px;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   // clearfix
   content: "";

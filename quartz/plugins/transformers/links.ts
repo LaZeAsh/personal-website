@@ -1,22 +1,22 @@
 import { QuartzTransformerPlugin } from "../types"
 import {
-  CanonicalSlug,
+  FullSlug,
   RelativeURL,
+  SimpleSlug,
+  TransformOptions,
   _stripSlashes,
-  canonicalizeServer,
   joinSegments,
-  pathToRoot,
-  resolveRelative,
+  simplifySlug,
   splitAnchor,
-  transformInternalLink,
-} from "../../path"
+  transformLink,
+} from "../../util/path"
 import path from "path"
 import { visit } from "unist-util-visit"
 import isAbsoluteUrl from "is-absolute-url"
 
 interface Options {
   /** How to resolve Markdown paths */
-  markdownLinkResolution: "absolute" | "relative" | "shortest"
+  markdownLinkResolution: TransformOptions["strategy"]
   /** Strips folders from a link so that it looks nice */
   prettyLinks: boolean
 }
@@ -34,35 +34,14 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options> | undefined> =
       return [
         () => {
           return (tree, file) => {
-            const curSlug = canonicalizeServer(file.data.slug!)
-            const transformLink = (target: string): RelativeURL => {
-              const targetSlug = _stripSlashes(transformInternalLink(target).slice(".".length))
-              let [targetCanonical, targetAnchor] = splitAnchor(targetSlug)
-              if (opts.markdownLinkResolution === "relative") {
-                return targetSlug as RelativeURL
-              } else if (opts.markdownLinkResolution === "shortest") {
-                // if the file name is unique, then it's just the filename
-                const matchingFileNames = ctx.allSlugs.filter((slug) => {
-                  const parts = slug.split(path.posix.sep)
-                  const fileName = parts.at(-1)
-                  return targetCanonical === fileName
-                })
+            const curSlug = simplifySlug(file.data.slug!)
+            const outgoing: Set<SimpleSlug> = new Set()
 
-                // only match, just use it
-                if (matchingFileNames.length === 1) {
-                  const targetSlug = canonicalizeServer(matchingFileNames[0])
-                  return (resolveRelative(curSlug, targetSlug) + targetAnchor) as RelativeURL
-                }
-
-                // if it's not unique, then it's the absolute path from the vault root
-                // (fall-through case)
-              }
-
-              // treat as absolute
-              return joinSegments(pathToRoot(curSlug), targetSlug) as RelativeURL
+            const transformOptions: TransformOptions = {
+              strategy: opts.markdownLinkResolution,
+              allSlugs: ctx.allSlugs,
             }
 
-            const outgoing: Set<CanonicalSlug> = new Set()
             visit(tree, "element", (node, _index, _parent) => {
               // rewrite all links
               if (
@@ -76,17 +55,31 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options> | undefined> =
 
                 // don't process external links or intra-document anchors
                 if (!(isAbsoluteUrl(dest) || dest.startsWith("#"))) {
-                  dest = node.properties.href = transformLink(dest)
-                  const canonicalDest = path.posix.normalize(joinSegments(curSlug, dest))
+                  dest = node.properties.href = transformLink(
+                    file.data.slug!,
+                    dest,
+                    transformOptions,
+                  )
+
+                  // url.resolve is considered legacy
+                  // WHATWG equivalent https://nodejs.dev/en/api/v18/url/#urlresolvefrom-to
+                  const url = new URL(dest, `https://base.com/${curSlug}`)
+                  const canonicalDest = url.pathname
                   const [destCanonical, _destAnchor] = splitAnchor(canonicalDest)
-                  outgoing.add(destCanonical as CanonicalSlug)
+
+                  // need to decodeURIComponent here as WHATWG URL percent-encodes everything
+                  const simple = decodeURIComponent(
+                    simplifySlug(destCanonical as FullSlug),
+                  ) as SimpleSlug
+                  outgoing.add(simple)
                 }
 
                 // rewrite link internals if prettylinks is on
                 if (
                   opts.prettyLinks &&
                   node.children.length === 1 &&
-                  node.children[0].type === "text"
+                  node.children[0].type === "text" &&
+                  !node.children[0].value.startsWith("#")
                 ) {
                   node.children[0].value = path.basename(node.children[0].value)
                 }
@@ -100,9 +93,12 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options> | undefined> =
               ) {
                 if (!isAbsoluteUrl(node.properties.src)) {
                   let dest = node.properties.src as RelativeURL
-                  const ext = path.extname(node.properties.src)
-                  dest = node.properties.src = transformLink(dest)
-                  node.properties.src = dest + ext
+                  dest = node.properties.src = transformLink(
+                    file.data.slug!,
+                    dest,
+                    transformOptions,
+                  )
+                  node.properties.src = dest
                 }
               }
             })
@@ -117,6 +113,6 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<Options> | undefined> =
 
 declare module "vfile" {
   interface DataMap {
-    links: CanonicalSlug[]
+    links: SimpleSlug[]
   }
 }

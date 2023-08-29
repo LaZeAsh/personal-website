@@ -1,5 +1,5 @@
 import micromorph from "micromorph"
-import { CanonicalSlug, RelativeURL, getCanonicalSlug } from "../../path"
+import { FullSlug, RelativeURL, getFullSlug } from "../../util/path"
 
 // adapted from `micromorph`
 // https://github.com/natemoo-re/micromorph
@@ -12,9 +12,6 @@ const isLocalUrl = (href: string) => {
   try {
     const url = new URL(href)
     if (window.location.origin === url.origin) {
-      if (url.pathname === window.location.pathname) {
-        return !url.hash
-      }
       return true
     }
   } catch (e) {}
@@ -31,7 +28,7 @@ const getOpts = ({ target }: Event): { url: URL; scroll?: boolean } | undefined 
   return { url: new URL(href), scroll: "routerNoscroll" in a.dataset ? false : undefined }
 }
 
-function notifyNav(url: CanonicalSlug) {
+function notifyNav(url: FullSlug) {
   const event: CustomEventMap["nav"] = new CustomEvent("nav", { detail: { url } })
   document.dispatchEvent(event)
 }
@@ -46,10 +43,7 @@ async function navigate(url: URL, isBack: boolean = false) {
     })
 
   if (!contents) return
-  if (!isBack) {
-    history.pushState({}, "", url)
-    window.scrollTo({ top: 0 })
-  }
+
   const html = p.parseFromString(contents, "text/html")
   let title = html.querySelector("title")?.textContent
   if (title) {
@@ -64,7 +58,18 @@ async function navigate(url: URL, isBack: boolean = false) {
   announcer.dataset.persist = ""
   html.body.appendChild(announcer)
 
+  // morph body
   micromorph(document.body, html.body)
+
+  // scroll into place and add history
+  if (!isBack) {
+    if (url.hash) {
+      const el = document.getElementById(decodeURIComponent(url.hash.substring(1)))
+      el?.scrollIntoView()
+    } else {
+      window.scrollTo({ top: 0 })
+    }
+  }
 
   // now, patch head
   const elementsToRemove = document.head.querySelectorAll(":not([spa-preserve])")
@@ -72,7 +77,12 @@ async function navigate(url: URL, isBack: boolean = false) {
   const elementsToAdd = html.head.querySelectorAll(":not([spa-preserve])")
   elementsToAdd.forEach((el) => document.head.appendChild(el))
 
-  notifyNav(getCanonicalSlug(window))
+  // delay setting the url until now
+  // at this point everything is loaded so changing the url should resolve to the correct addresses
+  if (!isBack) {
+    history.pushState({}, "", url)
+  }
+  notifyNav(getFullSlug(window))
   delete announcer.dataset.persist
 }
 
@@ -91,8 +101,9 @@ function createRouter() {
       }
     })
 
-    window.addEventListener("popstate", () => {
-      if (window.location.hash) return
+    window.addEventListener("popstate", (event) => {
+      const { url } = getOpts(event) ?? {}
+      if (window.location.hash && window.location.pathname === url?.pathname) return
       try {
         navigate(new URL(window.location.toString()), true)
       } catch (e) {
@@ -119,7 +130,7 @@ function createRouter() {
 }
 
 createRouter()
-notifyNav(getCanonicalSlug(window))
+notifyNav(getFullSlug(window))
 
 if (!customElements.get("route-announcer")) {
   const attrs = {

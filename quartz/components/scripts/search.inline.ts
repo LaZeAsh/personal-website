@@ -1,10 +1,11 @@
 import { Document } from "flexsearch"
 import { ContentDetails } from "../../plugins/emitters/contentIndex"
 import { registerEscapeHandler, removeAllChildren } from "./util"
-import { CanonicalSlug, getClientSlug, resolveRelative } from "../../path"
+import { FullSlug, resolveRelative } from "../../util/path"
 
 interface Item {
-  slug: CanonicalSlug
+  id: number
+  slug: FullSlug
   title: string
   content: string
 }
@@ -63,6 +64,7 @@ function highlight(searchTerm: string, text: string, trim?: boolean) {
 }
 
 const encoder = (str: string) => str.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/)
+let prevShortcutHandler: ((e: HTMLElementEventMap["keydown"]) => void) | undefined = undefined
 document.addEventListener("nav", async (e: unknown) => {
   const currentSlug = (e as CustomEventMap["nav"]).detail.url
 
@@ -72,6 +74,7 @@ document.addEventListener("nav", async (e: unknown) => {
   const searchIcon = document.getElementById("search-icon")
   const searchBar = document.getElementById("search-bar") as HTMLInputElement | null
   const results = document.getElementById("results-container")
+  const idDataMap = Object.keys(data) as FullSlug[]
 
   function hideSearch() {
     container?.classList.remove("active")
@@ -107,11 +110,15 @@ document.addEventListener("nav", async (e: unknown) => {
     }
   }
 
-  const formatForDisplay = (term: string, slug: CanonicalSlug) => ({
-    slug,
-    title: highlight(term, data[slug].title ?? ""),
-    content: highlight(term, data[slug].content ?? "", true),
-  })
+  const formatForDisplay = (term: string, id: number) => {
+    const slug = idDataMap[id]
+    return {
+      id,
+      slug,
+      title: highlight(term, data[slug].title ?? ""),
+      content: highlight(term, data[slug].content ?? "", true),
+    }
+  }
 
   const resultToHTML = ({ slug, title, content }: Item) => {
     const button = document.createElement("button")
@@ -120,7 +127,8 @@ document.addEventListener("nav", async (e: unknown) => {
     button.innerHTML = `<h3>${title}</h3><p>${content}</p>`
     button.addEventListener("click", () => {
       const targ = resolveRelative(currentSlug, slug)
-      window.spaNavigate(new URL(targ, getClientSlug(window)))
+      window.spaNavigate(new URL(targ, window.location.toString()))
+      hideSearch()
     })
     return button
   }
@@ -139,22 +147,26 @@ document.addEventListener("nav", async (e: unknown) => {
     }
   }
 
-  function onType(e: HTMLElementEventMap["input"]) {
+  async function onType(e: HTMLElementEventMap["input"]) {
     const term = (e.target as HTMLInputElement).value
-    const searchResults = index?.search(term, numSearchResults) ?? []
-    const getByField = (field: string): CanonicalSlug[] => {
+    const searchResults = (await index?.searchAsync(term, numSearchResults)) ?? []
+    const getByField = (field: string): number[] => {
       const results = searchResults.filter((x) => x.field === field)
-      return results.length === 0 ? [] : ([...results[0].result] as CanonicalSlug[])
+      return results.length === 0 ? [] : ([...results[0].result] as number[])
     }
 
     // order titles ahead of content
-    const allIds: Set<CanonicalSlug> = new Set([...getByField("title"), ...getByField("content")])
+    const allIds: Set<number> = new Set([...getByField("title"), ...getByField("content")])
     const finalResults = [...allIds].map((id) => formatForDisplay(term, id))
     displayResults(finalResults)
   }
 
-  document.removeEventListener("keydown", shortcutHandler)
+  if (prevShortcutHandler) {
+    document.removeEventListener("keydown", prevShortcutHandler)
+  }
+
   document.addEventListener("keydown", shortcutHandler)
+  prevShortcutHandler = shortcutHandler
   searchIcon?.removeEventListener("click", showSearch)
   searchIcon?.addEventListener("click", showSearch)
   searchBar?.removeEventListener("input", onType)
@@ -168,11 +180,11 @@ document.addEventListener("nav", async (e: unknown) => {
       optimize: true,
       encode: encoder,
       document: {
-        id: "slug",
+        id: "id",
         index: [
           {
             field: "title",
-            tokenize: "forward",
+            tokenize: "reverse",
           },
           {
             field: "content",
@@ -182,12 +194,15 @@ document.addEventListener("nav", async (e: unknown) => {
       },
     })
 
+    let id = 0
     for (const [slug, fileData] of Object.entries<ContentDetails>(data)) {
-      await index.addAsync(slug, {
-        slug: slug as CanonicalSlug,
+      await index.addAsync(id, {
+        id,
+        slug: slug as FullSlug,
         title: fileData.title,
         content: fileData.content,
       })
+      id++
     }
   }
 
