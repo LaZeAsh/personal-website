@@ -25,6 +25,14 @@ Sometimes [[Christopher Gibbons|Mr.Gibbons]] drops hints before the unit test an
 - "Read the graph"
 - Hardest part of the test: 
 	- Maximum total displacement in the positive & negative direction
+- Acceleration, velocity, total displacement, distance covered, constant velocity
+- Half the test is the Kinematics Graph Worksheet
+- Steers clear of distance questions
+- No slope on a tangent line on a velocity time graph
+- How to find a slope on the tangent line (ON THE TEST)
+- Will give a curve on a velocity time graph and ask for the instantaneous velocity at a point (need to know how to draw tangent line for that)
+- 2 Speed Shifter Lab
+- 
 
 
 Unit 3 - 4 part calculation (if done without then you will get 1 point)

@@ -10,10 +10,17 @@ A lot of stuff with motion and velocity
 
 ## Unit 1: Introduction to Physics & some basic skills
 
+### Reading
+
+- [[Physics - Chapter 2]]
+- [[Physics - Chapter 3]]
 - 
+
 - Speed of light 
 
+## Notes
 - [[Graphical Kinematics Notes]]
+## Labs
 - [[Hot Wheels Labs]]
 - 
 
